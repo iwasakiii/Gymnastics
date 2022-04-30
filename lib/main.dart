@@ -12,8 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        brightness: Brightness.dark,
-        primaryColor: Colors.amber[800],
+        primaryColor: Colors.blue[800],
       ),
       home: const MyTextInput(),
     );

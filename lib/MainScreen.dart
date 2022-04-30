@@ -4,6 +4,24 @@ class MyTextInput extends StatelessWidget {
   const MyTextInput({Key? key}) : super(key: key);
 
   @override
+  _MyTextInput createState() => _MyTextInput();
+}
+
+// Define a corresponding State class.
+// This class holds the data related to the Form.
+class _MyTextInput extends State<MyCustomForm> {
+  // Create a text controller and use it to retrieve the current value
+  // of the TextField.
+  final myController = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    myController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -13,8 +31,9 @@ class MyTextInput extends StatelessWidget {
         ),
         title: const Text('ファイル'),
       ),
-      body: Container(
-          ),
+      body: Center(
+        child: Text(myController.text),
+      )
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showDialog(
@@ -29,14 +48,21 @@ class MyTextInput extends StatelessWidget {
                 ),
                 actions: <Widget>[
                   FlatButton(
-                    // color: Colors.green,
+                    child: Text('キャンセル'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  FlatButton(
                     textColor: Colors.blue,
                     child: Text('作成する'),
                     onPressed: () {
+                      controller: myController;
+                      Navigator.of(context).pop();
                     },
                   ),
-
                 ],
+
               ),
           );
         },
