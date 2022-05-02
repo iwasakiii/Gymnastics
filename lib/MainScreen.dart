@@ -2,24 +2,7 @@ import 'package:flutter/material.dart';
 
 class MyTextInput extends StatelessWidget {
   const MyTextInput({Key? key}) : super(key: key);
-
-  @override
-  _MyTextInput createState() => _MyTextInput();
-}
-
-// Define a corresponding State class.
-// This class holds the data related to the Form.
-class _MyTextInput extends State<MyCustomForm> {
-  // Create a text controller and use it to retrieve the current value
-  // of the TextField.
-  final myController = TextEditingController();
-
-  @override
-  void dispose() {
-    // Clean up the controller when the widget is disposed.
-    myController.dispose();
-    super.dispose();
-  }
+  final valueController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +15,8 @@ class _MyTextInput extends State<MyCustomForm> {
         title: const Text('ファイル'),
       ),
       body: Center(
-        child: Text(myController.text),
-      )
+
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showDialog(
@@ -41,6 +24,7 @@ class _MyTextInput extends State<MyCustomForm> {
               builder: (_) => AlertDialog(
                 title: Text("フォルダ名を入力して下さい"),
                 content: TextField(
+                  controller: valueController,
                   decoration: InputDecoration(
                     hintText: "フォルダ名",
                   ),
@@ -57,7 +41,6 @@ class _MyTextInput extends State<MyCustomForm> {
                     textColor: Colors.blue,
                     child: Text('作成する'),
                     onPressed: () {
-                      controller: myController;
                       Navigator.of(context).pop();
                     },
                   ),
